@@ -119,18 +119,18 @@ class Repository:
 
 @dataclass
 class Organization:
-    login: str
-    id: int
-    node_id: str
-    url: str
-    repos_url: str
-    events_url: str
-    hooks_url: str
-    issues_url: str
-    members_url: str
-    public_members_url: str
-    avatar_url: str
-    description: str
+    login: Optional[str]
+    id: Optional[int]
+    node_id: Optional[str]
+    url: Optional[str]
+    repos_url: Optional[str]
+    events_url: Optional[str]
+    hooks_url: Optional[str]
+    issues_url: Optional[str]
+    members_url: Optional[str]
+    public_members_url: Optional[str]
+    avatar_url: Optional[str]
+    description: Optional[str]
 
 
 @dataclass
@@ -157,7 +157,7 @@ class Sender:
 
 @moose_data_model
 @dataclass
-class RawStarEvent:
+class LiveStarEvent:
     action: Key[str]
     starred_at: Optional[str]
     repository: Repository

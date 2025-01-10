@@ -57,7 +57,8 @@ class StargazerIngester:
                 "starred_at": stargazer["starred_at"],
                 "login": stargazer["user"]["login"], 
                 "avatar_url": stargazer["user"]["avatar_url"],
-                "repos_url": stargazer["user"]["repos_url"]
+                "repos_url": stargazer["user"]["repos_url"],
+                "stars_added": 1
             }
             for stargazer in stargazers
         ]
@@ -79,10 +80,15 @@ def main():
     load_dotenv()
     
     # Configuration
+    environment = os.getenv('ENVIRONMENT', 'dev')
     token = os.getenv('GITHUB_ACCESS_TOKEN')
     owner = os.getenv('GITHUB_OWNER', '514-labs')
     repo = os.getenv('GITHUB_REPO', 'moose')
-    base_url = os.getenv('MOOSE_API_HOST', 'http://localhost:4000')
+    
+    if environment == 'dev':
+        base_url = 'http://localhost:4000'
+    else:
+        base_url = os.getenv('MOOSE_API_HOST')
     
     if not token:
         raise ValueError("Please set the GITHUB_ACCESS_TOKEN environment variable.")

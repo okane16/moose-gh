@@ -27,7 +27,7 @@ def fn(source: HistoricalStargazer) -> Optional[list[StargazerProjectInfo]]:
                 stargazer_login=source.login,
                 repo_name=repo["name"],
                 repo_full_name=repo["full_name"],
-                description=repo["description"],
+                repo_description=repo["description"],
                 repo_url=repo["html_url"],
                 repo_stars=repo["stargazers_count"],
                 repo_watchers=repo["watchers_count"],

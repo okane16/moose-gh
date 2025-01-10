@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
 from moose_lib import Key, moose_data_model, DataModelConfig, IngestionConfig, IngestionFormat
- 
+from typing import Optional
+
 # Configuration for batch loading stargazer data
 # IngestionFormat.JSON_ARRAY enables the ingestion endpoint to accept arrays of records
 # This is more efficient than sending individual records when batch loading
@@ -18,3 +19,4 @@ class HistoricalStargazer:
     login: Key[str]
     avatar_url: str
     repos_url: str
+    stars_added: int ## either 1 or -1
