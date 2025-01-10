@@ -1,7 +1,8 @@
-from moose_lib import Key, moose_data_model
+from moose_lib import Key, moose_data_model, DataModelConfig, StorageConfig
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime
+ 
  
 @moose_data_model
 @dataclass
@@ -10,7 +11,7 @@ class StargazerProjectInfo:
     stargazer_login: Key[str]
     repo_name: str
     repo_full_name: str
-    description: Optional[str]
+    repo_description: Optional[str]
     repo_url: str
     repo_stars: int
     repo_watchers: int

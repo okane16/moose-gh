@@ -1,4 +1,3 @@
-
 # This file is where you can define your SQL queries to shape and manipulate batches
 # of data using Blocks. Blocks can also manage materialized views to store the results of 
 # your queries for improved performance. A materialized view is the recommended approach for aggregating
@@ -31,7 +30,8 @@ TABLE_OPTIONS = TableCreateOptions(
         "language": "String",
         "total_projects": "AggregateFunction(count, Int64)",
         "total_repo_size_kb": "AggregateFunction(sum, Int64)", 
-        "avg_repo_size_kb": "AggregateFunction(avg, Int64)"
+        "avg_repo_size_kb": "AggregateFunction(avg, Int64)",
+        "unique_developers": "AggregateFunction(uniq, String)"
     },
     engine=ClickHouseEngines.AggregatingMergeTree,
     order_by="language",
@@ -49,8 +49,9 @@ SELECT
     language,
     countState(*) AS total_projects,
     sumState(repo_size_kb) AS total_repo_size_kb,
-    avgState(repo_size_kb) AS avg_repo_size_kb
-FROM StargazerProjectInfo_0_0
+    avgState(repo_size_kb) AS avg_repo_size_kb,
+    uniqState(stargazer_login) AS unique_developers
+FROM StargazerProjectsDeduped
 GROUP BY language
 '''
  
